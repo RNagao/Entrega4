@@ -1,8 +1,5 @@
 from rest_framework import serializers
-from api.model.Postagem import Postagem
-from api.model.Pontuacao import Pontuacao
-
-from rest_framework.authtoken.models import Token
+from api.models import Postagem, Pontuacao, Usuario, Curtida, Comentario
 
 class PostagemSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,3 +10,19 @@ class PontuacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pontuacao
         fields = '__all__'
+
+class CurtidaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Curtida
+        fields = '__all__'
+
+class ComentarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comentario
+        fields = '__all__'
+
+class UsuarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
+        fields = '__all__'
+        extra_kwargs = {'password':{'write_only': True}}
