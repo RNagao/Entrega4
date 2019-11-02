@@ -3,12 +3,10 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 
-from django.contrib.auth.models import User
-
 from api.controllers.PostagemController import PostagemList, PostagemDetail
 from api.controllers.PontuacaoController import PontuacaoList, PontuacaoDetail
 
-from api.serializers import PostagemSerializer, PontuacaoSerializer, UserSerializer
+from api.serializers import PostagemSerializer, PontuacaoSerializer, UsuarioSerializer
 
 from rest_framework import generics
 from rest_framework.permissions import IsAdminUser

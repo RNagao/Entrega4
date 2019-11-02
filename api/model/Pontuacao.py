@@ -1,8 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
+from api.model.Usuario import Usuario
 
 class Pontuacao(models.Model):
-    funcionario = models.ForeignKey(User, on_delete = models.CASCADE)
+    funcionario = models.ForeignKey(Usuario, on_delete = models.CASCADE)
     pontos = models.IntegerField(default = 0)
 
     def __str__(self):
