@@ -4,32 +4,47 @@ from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 
 from api.models import Postagem, Usuario
-
-
+from api.serializers import PostagemSerializer
 
 class PostagemList(APIView):
-    #/postagem/
     def post (self, request):
+        #/postagem/
         texto = request.data['texto']
-        autor_id = request.data['autor']
+        numeroComentarios = request.data['numComentarios']
+        numeroCurtidas = request.data['numCurtidas']
+        autorId = request.data['autor']
 
-        autor = get_object_or_404(User, pk=autor_id)
+        autor = get_object_or_404(Usuario, pk=autorId)
 
-        postagem = Postagem(texto=texto, autor=autor)
+        postagem = Postagem(texto=texto, autor=autor, numeroComentarios=numeroComentarios, numeroCurtidas=numeroCurtidas)
         postagem.save()
 
         data = PostagemSerializer(postagem).data
         
         return Response(data)
 
+    def get(self, request):
+        postagem = Postagem.objects.all()
+        data = PostagemSerializer(postagem, many=True).data
+
+        return Response(data)
+
 
 class PostagemDetail(APIView):
     def get(self, request, pk):
-        #user/postagem/pk
-        autor = get_object_or_404(User, pk=pk)
+        #usuarios/postagem/pk
+        autor = get_object_or_404(Usuario, pk=pk)
 
         postagem = Postagem.objects.filter(autor=autor)
 
         data = PostagemSerializer(postagem, many=True).data
+
+        return Response(data)
+
+    def delete(self, request,pk):
+        postagem = get_object_or_404(Postagem, pk=pk)
+        postagem.delete()
+
+        data = PostagemSerializer(postagem).data
 
         return Response(data)

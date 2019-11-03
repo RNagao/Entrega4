@@ -4,27 +4,43 @@ from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 
 from api.models import Usuario
-
+from api.serializers import UsuarioSerializer
 
 class UsuarioList(APIView):
     def post(self, request):
+        #/usuario/
         username = request.data['username']
         email = request.data['email']
         password = request.data["password"]
         nome = request.data["nome"]
-        is_admin = request.data["is_admin"]
+        isAdmin = request.data["isAdmin"]
 
 
-        user = Usuario(nome=nome, email=email, username=username, is_admin=is_admin)
+        user = Usuario(nome=nome, email=email, username=username, isAdmin=isAdmin)
         user.set_password(password)
 
-        validade = Usuario.objects.filter(username=user.username)
-        validade_email = Usuario.objects.filter(email=user.email)
+        validadeUsuario = Usuario.objects.filter(username=user.username)
+        validadeNome = Usuario.objects.filter(nome=user.nome)
 
-        if not (UsuarioSerializer(validade, many=True).data or UsuarioSerializer(validade_email, many=True).data):
+        if not (UsuarioSerializer(validadeUsuario, many=True).data or UsuarioSerializer(validadeNome, many=True).data):
             user.save()
             data = UsuarioSerializer(user).data
             return Response(data)
 
         else:
             return Response({'error': 'User already exists'})
+
+    def get(self, request):
+        usuario = Usuario.objects.all()
+        data = UsuarioSerializer(usuario, many=True).data
+
+        return Response(data)
+
+class UsuarioDetail(APIView):
+    def delete(self, request,pk):
+        usuario = get_object_or_404(Usuario, pk=pk)
+        usuario.delete()
+
+        data = UsuarioSerializer(usuario).data
+
+        return Response(data)

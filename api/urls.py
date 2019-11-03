@@ -1,11 +1,15 @@
 from django.urls import path
-from api.views import PostagemList, PostagemDetail, PontuacaoList, PontuacaoDetail, UserCreate, LoginView
+from api.views import PostagemList, PostagemDetail, PontuacaoList, PontuacaoDetail, UsuarioList, UsuarioDetail, ComentarioList, ComentarioDetail, CurtidaList, CurtidaDetail
 
 urlpatterns = [
+    path('usuario/', UsuarioList.as_view()),
+    path('usuario/<int:pk>', UsuarioDetail.as_view()),
     path('postagem/', PostagemList.as_view()),
-    path('postagem/<int:pk>', PostagemDetail.as_view()),
-    path('users/pontuacao/', PontuacaoList.as_view()),
-    path('users/pontuacao/<int:pk>', PontuacaoDetail.as_view()),
-    path('users/', UserCreate.as_view()),
-    path('login/', LoginView.as_view())
+    path('usuario/postagem/<int:pk>', PostagemDetail.as_view()),
+    path('pontuacao/', PontuacaoList.as_view()),
+    path('usuario/pontuacao/<int:pk>', PontuacaoDetail.as_view()),
+    path('comentario/', ComentarioList.as_view()),
+    path('postagem/comentario/<int:pk>', ComentarioDetail.as_view()),
+    path('curtida/', CurtidaList.as_view()),
+    path('postagem/curtida/<int:pk>', CurtidaDetail.as_view()),
 ]
