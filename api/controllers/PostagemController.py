@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from api.models import Postagem, Usuario
 from api.serializers import PostagemSerializer
 
+
 class PostagemList(APIView):
     def post (self, request):
         #/postagem/

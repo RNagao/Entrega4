@@ -1,5 +1,6 @@
 from django.urls import path
-from api.views import PostagemList, PostagemDetail, PontuacaoList, PontuacaoDetail, UsuarioList, UsuarioDetail, ComentarioList, ComentarioDetail, CurtidaList, CurtidaDetail
+from api.views import PostagemList, PostagemDetail, PontuacaoList, PontuacaoDetail, UsuarioList, UsuarioDetail, ComentarioList, ComentarioDetail, CurtidaList, CurtidaDetail, LoginView
+
 
 urlpatterns = [
     path('usuario/', UsuarioList.as_view()),
@@ -12,4 +13,5 @@ urlpatterns = [
     path('postagem/comentario/<int:pk>', ComentarioDetail.as_view()),
     path('curtida/', CurtidaList.as_view()),
     path('postagem/curtida/<int:pk>', CurtidaDetail.as_view()),
+    path('login/', LoginView.as_view())
 ]

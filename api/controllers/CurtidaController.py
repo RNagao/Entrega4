@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from api.models import Postagem, Usuario, Curtida
 from api.serializers import CurtidaSerializer
 
+
 class CurtidaList(APIView):
     def post (self, request):
         #/curtida/

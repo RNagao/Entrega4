@@ -3,10 +3,14 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 
-from api.models import Usuario
+from api.models import Usuario, createToken
 from api.serializers import UsuarioSerializer
 
+
 class UsuarioList(APIView):
+    authentication_classes = ()
+    permission_classes = ()
+
     def post(self, request):
         #/usuario/
         username = request.data['username']
@@ -21,8 +25,9 @@ class UsuarioList(APIView):
 
         validadeUsuario = Usuario.objects.filter(username=user.username)
         validadeNome = Usuario.objects.filter(nome=user.nome)
+        validadeEmail = Usuario.objects.filter(email=user.email)
 
-        if not (UsuarioSerializer(validadeUsuario, many=True).data or UsuarioSerializer(validadeNome, many=True).data):
+        if not (UsuarioSerializer(validadeUsuario, many=True).data or UsuarioSerializer(validadeNome, many=True).data or UsuarioSerializer(validadeEmail, many=True).data):
             user.save()
             data = UsuarioSerializer(user).data
             return Response(data)

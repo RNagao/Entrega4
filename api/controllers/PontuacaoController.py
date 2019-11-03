@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from api.models import Pontuacao, Usuario
 from api.serializers import PontuacaoSerializer
 
+
 class PontuacaoList(APIView):
     def post (self, request):
         #/pontuacao/
