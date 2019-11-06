@@ -9,13 +9,6 @@ import { SSL_OP_TLS_ROLLBACK_BUG } from 'constants';
 export default function Post(props) {
   return (
 
-    /*<View style = {styles.container}>
-        <View style = {styles.postContainer}>
-            <Text style = {styles.postTitle}>funcionario</Text>
-            <Text style = {styles.postDescription}>informacoes gerais</Text>
-        </View>
-    </View>*/
-    
     <View style={{flexDirection: 'row',borderBottomColor:'#bfc7c1', borderBottomWidth:1, paddingTop:5, backgroundColor:props.backgroundcolor}}>
         <View style= {{backgroundColor:props.backgroundcolor, width:screenWidth * 0.2,paddingTop:screenHeight * 0.01}}>
         </View>
